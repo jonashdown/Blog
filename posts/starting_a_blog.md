@@ -6,6 +6,7 @@ cover_image: ''
 canonical_url: null
 published: true
 id: 880052
+date: '2021-10-28T17:13:39Z'
 ---
 # Starting a Blog
 
