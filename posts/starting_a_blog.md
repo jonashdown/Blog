@@ -4,7 +4,7 @@ description: Decision to start a technical blog
 tags: ''
 cover_image: ''
 canonical_url: null
-published: false
+published: true
 id: 880052
 ---
 # Starting a Blog
