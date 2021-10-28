@@ -13,4 +13,4 @@ date: '2021-10-28T17:13:39Z'
 I have decided to start a technical blog. This will be a combination of tutorials, opinions and anecdotes of my experience of 20 years working in software.
 Hopefully the content will be of use to someone.
 
-{% user jonashdown }
+{% user jonashdown %}
