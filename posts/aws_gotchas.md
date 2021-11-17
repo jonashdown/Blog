@@ -4,7 +4,7 @@ description: My article description
 tags: 'aws, gotchas, timestanps'
 cover_image: ''
 canonical_url: null
-published: false
+published: true
 ---
 ## AWS Gotchas
 
@@ -27,7 +27,7 @@ const dynamoDb = new DocumentClient()
 
 const hoursInTheFuture = 24
 
-const timeInSeconds = () => {
+const getFutureTimeInSeconds = () => {
   const time = new Date()
   const hours = time.getHours() + hoursInTheFuture
 
@@ -44,7 +44,7 @@ export const deleteInTheFuture = async (id) => {
     },
     UpdateExpression: 'SET ttl = :t',
     ExpressionAttributeValues: {
-      ':t': timeInSeconds() //record will be deleted momentarily from now
+      ':t': getFutureTimeInSeconds() //record will be deleted 24 hours from now
     }
 
   }).promise()
