@@ -5,6 +5,7 @@ tags: 'aws, gotchas, timestanps'
 cover_image: ''
 canonical_url: null
 published: false
+id: 900927
 ---
 ## AWS Gotchas
 
