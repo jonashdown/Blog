@@ -6,6 +6,7 @@ cover_image: ''
 canonical_url: null
 published: true
 ---
+
 ## AWS Gotchas
 
 I will highlight AWS gotchas as I find them
