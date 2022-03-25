@@ -19,7 +19,7 @@ The team's integration tests are automatically run on an environment like live (
 
 e.g
 
-![diagram](./how_to_guarantee_race_condtions_in_int_testing-1.svg)
+![diagram](https://raw.githubusercontent.com/jonashdown/Blog/main/posts/how_to_guarantee_race_condtions_in_int_testing-1.svg?token=GHSAT0AAAAAABLNUI75MJ6WGLSBGGF4XZWEYR5YXDQ)
 
 ## How can race conditions occur ?
 
