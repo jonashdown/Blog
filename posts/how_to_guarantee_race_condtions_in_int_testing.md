@@ -1,10 +1,12 @@
 ---
-title:  How To Guarantee Race Conditions When Integration Testing
+title: How To Guarantee Race Conditions When Integration Testing
 description: An Exploration of how race conditions occur in integration testing and how to prevent them.
 tags: ''
 cover_image: ''
 canonical_url: null
 published: true
+id: 1034280
+date: '2022-03-25T13:38:14Z'
 ---
 
 After some recent outages with Github, my team found that a particular repo had a large number of flaky integration tests, which where uncovered when the team did some minor maintenance and highlighted by the outages.
