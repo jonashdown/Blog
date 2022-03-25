@@ -1,0 +1,23 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Blog is published to dev.to",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonashdown/Blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonashdown/Blog/issues"
+  },
+  "homepage": "https://github.com/jonashdown/Blog#readme",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^8.14.0",
+    "install": "^0.13.0"
+  }
+}
