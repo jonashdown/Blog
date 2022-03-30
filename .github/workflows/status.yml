@@ -1,7 +1,7 @@
 name: check_status
 on: 
     schedule: 
-      - cron: '55555 * * * * '
+      - cron: '5 * * * * '
 
 jobs:
     check_status:
