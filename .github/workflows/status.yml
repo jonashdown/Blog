@@ -3,6 +3,10 @@ on:
     workflow_run:
       workflows: [publish]
 
+env:
+    GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
 jobs:
     check_status:
       runs-on: ubuntu-latest
