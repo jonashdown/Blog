@@ -12,5 +12,5 @@ jobs:
       steps:
         - name: Check Published Status
           run: |
-            "[ 'success' == '$(gh run list -b main -w publish -R jonashdown/Blog | awk 'NR==1{print $2}')' ]"
+            [ "success" == "$(gh run list -b main -w publish -R jonashdown/Blog | awk 'NR==1{print $2}')" ]
 
