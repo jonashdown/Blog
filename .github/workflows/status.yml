@@ -1,0 +1,11 @@
+on: 
+    schedule: 
+      - cron: '2020 * * * * '
+
+jobs:
+    check_status:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check Published Status
+          run: [ "success" = "$(gh run list -b main -w 'publish' | awk 'NR==1{print $2}')" ]
+
