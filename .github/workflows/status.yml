@@ -12,6 +12,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Check Published Status
-          run: | 
+          run: |
+            gh auth login
             "[ 'success' = '$(gh run list -b main -w publish | awk 'NR==1{print $2}')' ]"
 
