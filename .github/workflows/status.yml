@@ -12,6 +12,5 @@ jobs:
       steps:
         - name: Check Published Status
           run: |
-            gh auth login
             "[ 'success' = '$(gh run list -b main -w publish | awk 'NR==1{print $2}')' ]"
 
