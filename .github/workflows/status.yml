@@ -1,6 +1,7 @@
+name: status
 on: 
     schedule: 
-      - cron: '2020 * * * * '
+      - cron: '20 * * * * '
 
 jobs:
     check_status:
