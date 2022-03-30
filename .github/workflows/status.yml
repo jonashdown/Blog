@@ -1,7 +1,7 @@
 name: check_status
 on: 
-    schedule: 
-      - cron: '5/5 * * * * '
+    workflow_run:
+      workflows: [publish]
 
 jobs:
     check_status:
@@ -9,5 +9,5 @@ jobs:
       steps:
         - name: Check Published Status
           run: | 
-            '[ "success" = "$(gh run list -b main -w 'publish' | awk 'NR==1{print $2}')" ]'
+            "[ 'success' = '$(gh run list -b main -w publish | awk 'NR==1{print $2}')' ]"
 
