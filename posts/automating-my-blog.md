@@ -1,6 +1,6 @@
 ---
-title:  Automating my Blog
-description: The journey I went thorough to automate publishing my blog.
+title:  'Automating my Blog'
+description: 'The journey I went thorough to automate publishing my blog.'
 tags: 'Automating, github actions, mermaid.js, dev.to'
 cover_image: ''
 canonical_url: null
