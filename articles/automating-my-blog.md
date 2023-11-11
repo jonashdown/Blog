@@ -25,8 +25,9 @@ A quick search of the [Github marketplace](https://github.com/marketplace?catego
 After following the config steps for this action, I was able to see articles being published to my blog. The default config worked fine for the way I work, which is to always create a Pull Request before I merge to main.
 
 ## Generating Diagrams
-Mermaid.js seemed like the obvious choice as it integrates with Markdown and Github, and importantly has a commnand line interface, which means it can be used in a workflow file.
+[Mermaid.js](https://mermaid.js.org/) seemed like the obvious choice as it integrates with Markdown and Github, and importantly has a [commnand line interface](https://github.com/mermaid-js/mermaid-cli), which means it can be used in a workflow file.
 
-Any generated images can use the github raw urls, so a bit of `sed` magic will convert the local urls that mermaid generates into a full url. N.b to take advantage of Github as a hosting service, the Repo will have to be set as public otherwise, there will be a need to play with tokens and their expiry. I will talk about how the repo is secured in another post.
+Any generated images can use the github raw urls, so a bit of `sed` magic will convert the local urls that mermaid generates into a full url. N.b to take advantage of Github as a hosting service, the repo will have to be set as public otherwise, there will be a need to play with tokens and their expiry. I will write about how the repo is secured in another post.
 
+I eill also need ot consider how the generated images are added to the repo.
 
