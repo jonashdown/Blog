@@ -29,5 +29,5 @@ After following the config steps for this action, I was able to see articles bei
 
 Any generated images can use the github raw urls, so a bit of `sed` magic will convert the local urls that mermaid generates into a full url. N.b to take advantage of Github as a hosting service, the repo will have to be set as public otherwise, there will be a need to play with tokens and their expiry. I will write about how the repo is secured in another post.
 
-I eill also need ot consider how the generated images are added to the repo.
+I will also need ot consider how the generated images are added to the repo.
 
