@@ -1,10 +1,12 @@
 ---
-title:  'Automating my Blog'
-description: 'The journey I went thorough to automate publishing my blog.'
+title: Automating my Blog
+description: The journey I went thorough to automate publishing my blog.
 tags: 'Automating, github, mermaid, blog'
 cover_image: ''
 canonical_url: null
 published: true
+id: 1664005
+date: '2023-11-11T18:27:33Z'
 ---
 
 I use [Github](https://www.github.com) to store the code that I write, and [Github Actions](https://github.com/features/actions) to automate my workflows. My [blog](https://dev.to/jonashdown) is hosted on a number of platforms including [Dev.to](https://dev.to/jonashdown), which accepts markdown as an input format and has an [api](https://developers.forem.com/api).
