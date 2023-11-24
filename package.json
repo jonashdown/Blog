@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/jonashdown/Blog#readme",
   "dependencies": {
-    "@mermaid-js/mermaid-cli": "^9.4.0",
+    "@mermaid-js/mermaid-cli": "^10.6.1",
     "install": "^0.13.0"
   }
 }
