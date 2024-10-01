@@ -13,7 +13,7 @@ If I could store my blog in Github, I could do the following
  - Write blog articles off line and use git to keep them upto date.
  - Push completed articles to Github.
  - Take advantage of Github Actions to:
-   - Publish to various blogging platforms
+   - Publish to various blogging platforms kewl;rkwes4tploie
    - Grammar and spell check
    - Generate and store diagrams 
    - Inform social media platforms of new/updated articles
