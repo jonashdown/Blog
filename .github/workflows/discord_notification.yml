@@ -1,4 +1,4 @@
-name: Notify Discord of New Articles (RSS)
+name: Notify Discord of New Articles (Dev.to API)
 
 on:
   workflow_dispatch:
@@ -16,10 +16,9 @@ jobs:
           python-version: '3.x'
 
       - name: Install Python dependencies
-        run: pip install feedparser requests
+        run: pip install requests
 
-      - name: Run Discord RSS Notifier
+      - name: Run Discord Dev.to Notifier
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          RSS_FEED_URL: "https://dev.to/feed/jonashdown"
-        run: python scripts/discord_rss_notifier.py
+        run: python scripts/discord_devto_notifier.py
