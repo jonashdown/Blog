@@ -1,0 +1,33 @@
+name: Notify Bluesky of New Articles
+
+on:
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: pip install requests
+
+      - name: Get Bluesky Message
+        id: get_message
+        env:
+          DEVTO_USER: ${{ vars.DEVTO_USER }}
+        run: python scripts/bluesky_devto_notifier.py
+
+      - name: Post to Bluesky
+        if: steps.get_message.outputs.bluesky_message != ''
+        uses: myConsciousness/bluesky-post@v5
+        with:
+          identifier: ${{ secrets.BLUESKY_IDENTIFIER }}
+          password: ${{ secrets.BLUESKY_PASSWORD }}
+          text: ${{ steps.get_message.outputs.bluesky_message }}
