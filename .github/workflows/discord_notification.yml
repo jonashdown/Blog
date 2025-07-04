@@ -21,4 +21,5 @@ jobs:
       - name: Run Discord Dev.to Notifier
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DEVTO_USER: jonashdown
         run: python scripts/discord_devto_notifier.py
