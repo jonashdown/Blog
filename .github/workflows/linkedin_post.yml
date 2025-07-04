@@ -1,0 +1,17 @@
+name: Post New Articles to LinkedIn
+
+on:
+  workflow_dispatch:
+
+jobs:
+  post-to-linkedin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Post to LinkedIn
+        uses: p4p1/linkedin-marketing-workflow@main
+        with:
+          rss_feed: "https://dev.to/feed/jonashdown"
+          LINKEDIN_SECRET: ${{ secrets.LINKEDIN_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

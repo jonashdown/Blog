@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "add_images": "./scripts/add_images.sh"
+    "spell:check": "cspell \"**/*.md\" --no-progress",
+    "spell:fix": "cspell --fix \"**/*.md\" --no-progress",
+    "lint:check": "markdownlint \"**/*.md\"",
+    "lint:fix": "markdownlint --fix \"**/*.md\"",
+    "add_images": "./scripts/add_images.sh",
+    "create:article": "./scripts/create_article.sh"
   },
   "repository": {
     "type": "git",
@@ -17,14 +22,14 @@
     "url": "https://github.com/jonashdown/Blog/issues"
   },
   "homepage": "https://github.com/jonashdown/Blog#readme",
-  "dependencies": {
-    "@mermaid-js/mermaid-cli": "^10.6.1",
-    "install": "^0.13.0"
-  },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.6.0",
+    "cspell": "^9.1.2",
+    "install": "^0.13.0",
+    "markdownlint-cli": "^0.45.0",
     "pre-push": "^0.1.4"
   },
   "prepush": {
-    "run":  "add_images"
+    "run": "add_images"
   }
 }

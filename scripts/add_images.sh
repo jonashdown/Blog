@@ -1,10 +1,11 @@
 #! /bin/bash
 set -e
+mkdir -p _svgs
 
 #setup a url to load images from
 RAW_URL='https://raw.githubusercontent.com/jonashdown/Blog/main/_svg/'
 
-#decide if we have genarated images
+#decide if we have generated images
 GENERATED_IMAGES=false
 
 #loop over the articles folder and generate images
@@ -15,6 +16,8 @@ do
 
   #replace relative image urls with absolute
   sed -i 's@./@${RAW_URL}@g' posts/$(basename $f)
+  echo "
+[Buy me a coffee](https://buymeacoffee.com/jonashdown)" >> posts/$(basename $f)
 
   #move images to the _svg folder
   mv posts/$(basename -s .md $f)*.svg _svgs
