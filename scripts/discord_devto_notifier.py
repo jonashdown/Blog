@@ -3,7 +3,7 @@ import json
 import os
 
 DISCORD_WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
-DEVTO_API_URL = "https://dev.to/api/articles?per_page=1"
+DEVTO_API_URL = "https://dev.to/api/articles?per_page=1&username=jonashdown"
 LAST_CHECKED_FILE = 'last_checked_devto.json'
 
 def load_last_checked():
