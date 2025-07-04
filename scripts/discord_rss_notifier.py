@@ -2,6 +2,7 @@ import feedparser
 import requests
 import json
 import os
+import re
 
 DISCORD_WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')
 RSS_FEED_URL = os.getenv('RSS_FEED_URL')
@@ -53,8 +54,8 @@ def main():
         title = entry.title
         link = entry.link
         description = entry.summary if hasattr(entry, 'summary') else "No description available."
-        # Basic markdown cleanup for Discord
-        description = description.replace('<p>', '').replace('</p>', '').replace('<strong>', '**').replace('</strong>', '**')
+        # Strip all HTML tags from description
+        description = re.sub(r'<[^>]+>', '', description)
 
         try:
             send_discord_message(DISCORD_WEBHOOK_URL, title, link, description)
