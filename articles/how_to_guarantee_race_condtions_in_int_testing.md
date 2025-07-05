@@ -9,13 +9,13 @@ published: true
 
 After some recent outages with Github, my team found that a particular repo had a large number of flaky integration tests, which where uncovered when the team did some minor maintenance and highlighted by the outages.
 
-On checking both the main branch and running the builds from developers machines, it became obvious that the flakiness was caused by race condtions within the test suites, as different tests where failing on each build run.
+On checking both the main branch and running the builds from developers machines, it became obvious that the flakiness was caused by race conditions within the test suites, as different tests where failing on each build run.
 
-### Some Defintions
+### Some Definitions
 
 Race conditions occur when several processes compete for a resource, and flaky tests are often a manifestation of that.
 
-The team's integration tests are automatically run on an environment like live (in this case an AWS account that has been set up to replicate the live environment) and exercise individual components in a larger microservice architecture. Typically they either write to data stores or trigger events and assert that the expected processing has taken place by interogating other stores or capturing events from the processing.
+The team's integration tests are automatically run on an environment like live (in this case an AWS account that has been set up to replicate the live environment) and exercise individual components in a larger microservice architecture. Typically they either write to data stores or trigger events and assert that the expected processing has taken place by interrogating other stores or capturing events from the processing.
 
 e.g
 
@@ -32,7 +32,7 @@ sequenceDiagram
 
 ### Truncating databases whilst tests are still running
 
-Tidying up test data is good practice as it allows for stacks to be torn down efficiently without leaving any artifacts. However when each test suite attempts to truncate the databases it is using, race conditions are assured as other test suites may not have finished and may find themselves asserting against non-existant data.
+Tidying up test data is good practice as it allows for stacks to be torn down efficiently without leaving any artifacts. However when each test suite attempts to truncate the databases it is using, race conditions are assured as other test suites may not have finished and may find themselves asserting against non-existent data.
 
 ### Not allowing processes to complete before assertion
 
@@ -46,7 +46,7 @@ Copying test data between tests is guaranteed to get race conditions. Is test 1'
 
 ### Truncate databases after all tests have finished
 
-Have a seperate clean up step to truncate test data, and ensure that all tests are in a finished state.
+Have a separate clean up step to truncate test data, and ensure that all tests are in a finished state.
 
 This also means that failure to delete is not a test failure, and deletion is still possible should a test fail.
 
