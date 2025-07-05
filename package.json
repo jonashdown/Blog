@@ -9,7 +9,8 @@
     "spell:fix": "cspell --fix \"**/*.md\" --no-progress",
     "lint:check": "markdownlint \"**/*.md\"",
     "lint:fix": "markdownlint --fix \"**/*.md\"",
-    "add_images": "./scripts/add_images.sh",
+    "generate:images": "./scripts/generate_images.sh",
+    "commit:images": "./scripts/commit_images.sh",
     "create:article": "./scripts/create_article.sh"
   },
   "repository": {
@@ -26,12 +27,12 @@
     "@mermaid-js/mermaid-cli": "^11.6.0",
     "cspell": "^9.1.2",
     "install": "^0.13.0",
-    "markdownlint-cli": "^0.45.0",
-    "pre-push": "^0.1.4"
+    "markdownlint-cli": "^0.45.0"
   },
-  "prepush": {
-    "run": "add_images"
-  },
+  "pre-push": [
+    "generate:images",
+    "commit:images"
+  ],
   "dependencies": {
     "node-fetch": "^3.3.2"
   }

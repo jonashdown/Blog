@@ -23,23 +23,33 @@ fi
 read -p "Enter description (optional): " DESCRIPTION
 read -p "Enter tags (comma-separated, optional): " TAGS
 read -p "Enter cover image URL (optional): " COVER_IMAGE
+read -p "Enter series (optional): " SERIES
 
 # Construct front matter
 FRONT_MATTER="---
 title: ${ARTICLE_TITLE}
 description: ${DESCRIPTION}
 tags: '${TAGS}'
-cover_image: '${COVER_IMAGE}'
+cover_image: '${COVER_IMAGE}'"
+
+if [ -n "$SERIES" ]; then
+  FRONT_MATTER="${FRONT_MATTER}
+series: '${SERIES}'"
+fi
+
+FRONT_MATTER="${FRONT_MATTER}
 canonical_url: null
 published: true
 ---
 
 # ${ARTICLE_TITLE}
 
-<!-- Write your article content here -->
-"
+<!-- Write your article content here -->"
 
 # Create the file
-echo "$FRONT_MATTER" > "$FILE_PATH"
+echo -e "$FRONT_MATTER" > "$FILE_PATH"
+
+echo -e "
+[Buy me a coffee](https://buymeacoffee.com/jonashdown)" >> "$FILE_PATH"
 
 echo "Article '${FILE_PATH}' created successfully."
