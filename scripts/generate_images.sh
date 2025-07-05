@@ -19,6 +19,9 @@ do
     sed -i "s@\./@${RAW_URL}@g" "posts/$FILENAME"
 
     #move images to the _svgs folder
-    mv posts/${BASENAME_NO_EXT}*.svg _svgs/
+    for s in $(ls posts/${BASENAME_NO_EXT}*.svg)
+    do
+      mv $s _svgs/
+    done
   fi
 done
