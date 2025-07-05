@@ -10,19 +10,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.x'
+          node-version: '20'
 
-      - name: Install Python dependencies
-        run: pip install requests
+      - name: Install dependencies
+        run: npm install
 
       - name: Get Bluesky Message
         id: get_message
         env:
           DEVTO_USER: ${{ vars.DEVTO_USER }}
-        run: python scripts/bluesky_devto_notifier.py
+        run: node scripts/bluesky_devto_notifier.js
 
       - name: Post to Bluesky
         if: steps.get_message.outputs.bluesky_message != ''

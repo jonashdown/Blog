@@ -31,5 +31,8 @@
   },
   "prepush": {
     "run": "add_images"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
   }
 }
