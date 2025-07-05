@@ -26,6 +26,8 @@ def main():
         # Construct the message for Bluesky
         # Bluesky posts are typically short, so combine title, description, and URL
         message = f"{title}\n\n{description}\n\n{url}"
+        # Replace newlines with spaces for GITHUB_OUTPUT compatibility
+        single_line_message = message.replace('\n', ' ').replace('\r', ' ')
         print(f"Bluesky Message: {message}")
         # The actual posting to Bluesky will be handled by the GitHub Action
         # This script just prepares the message
