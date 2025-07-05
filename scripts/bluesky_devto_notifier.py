@@ -29,10 +29,12 @@ def main():
         print(f"Bluesky Message: {message}")
         # The actual posting to Bluesky will be handled by the GitHub Action
         # This script just prepares the message
-        print(f"::set-output name=bluesky_message::{message}")
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+            print(f"bluesky_message={message}", file=fh)
     else:
         print("No latest article found from Dev.to API.")
-        print("::set-output name=bluesky_message::")
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+            print("bluesky_message=", file=fh)
 
 if __name__ == "__main__":
     main()
