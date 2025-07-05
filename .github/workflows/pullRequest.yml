@@ -8,7 +8,7 @@ jobs:
     name: Proofread PRs
     steps:
       - name: Proofread PR
-        uses: streetsidesoftware/cspell-action@v2.0.3
+        uses: streetsidesoftware/cspell-action@v6.11.0
         id: proofread
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Required to write a PR review
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Required to write a PR review

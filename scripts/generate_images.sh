@@ -13,7 +13,7 @@ do
     BASENAME_NO_EXT=$(basename "$f" .md)
 
     #generate images using mermaid
-    npx mmdc -i "$f" -o "posts/$FILENAME"
+    bunx mmdc -i "$f" -o "posts/$FILENAME"
 
     #replace relative image urls with absolute
     sed -i "s@\./@${RAW_URL}@g" "posts/$FILENAME"

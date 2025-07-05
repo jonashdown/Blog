@@ -22,7 +22,7 @@ jobs:
         id: get_message
         env:
           DEVTO_USER: ${{ vars.DEVTO_USER }}
-        run: node scripts/bluesky_devto_notifier.js
+        run: bun run scripts/bluesky_devto_notifier.js
 
       - name: Post to Bluesky
         if: steps.get_message.outputs.bluesky_message != ''

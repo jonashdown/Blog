@@ -42,8 +42,6 @@ canonical_url: null
 published: true
 ---
 
-# ${ARTICLE_TITLE}
-
 <!-- Write your article content here -->"
 
 # Create the file
@@ -51,5 +49,6 @@ echo -e "$FRONT_MATTER" > "$FILE_PATH"
 
 echo -e "
 [Buy me a coffee](https://buymeacoffee.com/jonashdown)" >> "$FILE_PATH"
+echo -e "[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y1HG7Q3)" >> "$FILE_PATH"
 
 echo "Article '${FILE_PATH}' created successfully."

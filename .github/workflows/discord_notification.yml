@@ -22,4 +22,4 @@ jobs:
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           DEVTO_USER: ${{ vars.DEVTO_USER }}
-        run: node scripts/discord_devto_notifier.js
+        run: bun run scripts/discord_devto_notifier.js

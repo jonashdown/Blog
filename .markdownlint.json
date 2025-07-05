@@ -1,0 +1,28 @@
+{
+  "heading-increment": {
+    "level": 2
+  },
+  "heading-style": {
+    "style": "atx"
+  },
+  "ul-style": {
+    "style": "dash"
+  },
+  "ul-indent": {
+    "indent": 2
+  },
+  "no-inline-html": {
+    "allowed_elements": [ "dl", "dt", "dd" ]
+  },
+  "emphasis-style": {
+    "style": "asterisk"
+  },
+  "strong-style": {
+    "style": "asterisk"
+  },
+  "table-pipe-style": {
+    "style": "leading_and_trailing"
+  },
+  "line-length": false
+
+}

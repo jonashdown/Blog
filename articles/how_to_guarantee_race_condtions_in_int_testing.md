@@ -50,7 +50,6 @@ Have a seperate clean up step to truncate test data, and ensure that all tests a
 
 This also means that failure to delete is not a test failure, and deletion is still possible should a test fail.
 
-
 ### Allow processes to complete before assertion
 
 A simple `sleep` between writing input data and asserting against output data, whilst primitive, might work, however the sleep time will need to be tweaked to ensure processing has finished.
