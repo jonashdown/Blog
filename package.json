@@ -11,7 +11,8 @@
     "lint:fix": "markdownlint --fix \"**/*.md\"",
     "generate:images": "./scripts/generate_images.sh",
     "commit:images": "./scripts/commit_images.sh",
-    "create:article": "./scripts/create_article.sh"
+    "create:article": "./scripts/create_article.sh",
+    "postinstall": "rm -rf posts/* && mkdir -p posts && touch posts/.do-not-edit"
   },
   "repository": {
     "type": "git",
@@ -29,10 +30,7 @@
     "install": "^0.13.0",
     "markdownlint-cli": "^0.45.0"
   },
-  "pre-push": [
-    "generate:images",
-    "commit:images"
-  ],
+  
   "dependencies": {
     "node-fetch": "^3.3.2"
   }
