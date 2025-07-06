@@ -1,5 +1,5 @@
 // Bun has a native fetch API, no need for node-fetch
-import { appendFile } from 'fs/promises';
+import { appendFile } from "node:fs/promises";
 
 const DEVTO_API_URL = `https://dev.to/api/articles?per_page=1&username=${process.env.DEVTO_USER}`;
 
@@ -24,10 +24,14 @@ export async function main() {
     const latestArticle = await getLatestDevtoArticle();
 
     if (!latestArticle) {
-      throw new Error("No latest article found from Dev.to API.")
+      throw new Error("No latest article found from Dev.to API.");
     }
 
-    const { title, url, description = 'No description available.' } = latestArticle;
+    const {
+      title,
+      url,
+      description = "No description available.",
+    } = latestArticle;
 
     // Construct the message for Bluesky
     const message = `${title}\n\n${description}\n\n${url}`;
@@ -36,13 +40,13 @@ export async function main() {
     // The actual posting to Bluesky will be handled by the GitHub Action
     // This script just prepares the message
     if (process.env.GITHUB_OUTPUT) {
-      await appendFile(process.env.GITHUB_OUTPUT, `bluesky_message=${message}\n`);
+      await appendFile(
+        process.env.GITHUB_OUTPUT,
+        `bluesky_message=${message}\n`,
+      );
     }
-
   } catch (error) {
-    console.error('An error occurred:', error);
+    console.error("An error occurred:", error);
     process.exit(1);
   }
 }
-
-

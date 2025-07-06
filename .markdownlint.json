@@ -12,7 +12,7 @@
     "indent": 2
   },
   "no-inline-html": {
-    "allowed_elements": [ "dl", "dt", "dd" ]
+    "allowed_elements": ["dl", "dt", "dd"]
   },
   "emphasis-style": {
     "style": "asterisk"
@@ -24,5 +24,4 @@
     "style": "leading_and_trailing"
   },
   "line-length": false
-
 }
