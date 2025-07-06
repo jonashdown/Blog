@@ -21,11 +21,11 @@ e.g
 
 ```mermaid
 sequenceDiagram
-  Test->>+InputStore: input data
-  InputStore->>+Processor: input data
-  Processor->>+OutputStore: processed data
-  OutputStore->>+Test: processed data
-  Test->>+Test: assertion
+  Test->>+InputStore: Send input data
+  InputStore->>+Processor: Forward input data
+  Processor->>+OutputStore: Store processed data
+  OutputStore->>+Test: Retrieve processed data
+  Test->>+Test: Perform assertion
 ```
 
 ## How can race conditions occur ?
