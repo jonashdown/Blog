@@ -11,7 +11,7 @@ After some recent outages with Github, my team found that a particular repo had 
 
 On checking both the main branch and running the builds from developers machines, it became obvious that the flakiness was caused by race conditions within the test suites, as different tests where failing on each build run.
 
-### Some Definitions
+## Some Definitions
 
 Race conditions occur when several processes compete for a resource, and flaky tests are often a manifestation of that.
 
