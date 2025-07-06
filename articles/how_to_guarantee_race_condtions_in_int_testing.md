@@ -20,6 +20,7 @@ The team's integration tests are automatically run on an environment like live (
 e.g
 
 ```mermaid
+%%{init: {'themeVariables': {'primaryColor': '#b3e0ff', 'secondaryColor': '#c2f0c2', 'tertiaryColor': '#ffe0b3', 'background': '#ffffff'}}}%%
 sequenceDiagram
   Test->>+InputStore: input data
   InputStore->>+Processor: input data
