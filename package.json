@@ -1,8 +1,25 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "description": "Blog is published to dev.to",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonashdown/Blog.git"
+  },
   "main": "index.js",
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.6",
+    "@mermaid-js/mermaid-cli": "^11.6.0",
+    "cspell": "^9.1.2",
+    "depcheck": "^1.4.7",
+    "markdownlint-cli": "^0.45.0"
+  },
+  "bugs": {
+    "url": "https://github.com/jonashdown/Blog/issues"
+  },
+  "description": "Blog is published to dev.to",
+  "homepage": "https://github.com/jonashdown/Blog#readme",
+  "license": "ISC",
   "scripts": {
     "test": "bun test",
     "spell:check": "cspell \"**/*.md\" --no-progress",
@@ -13,25 +30,5 @@
     "commit:images": "./scripts/commit_images.sh",
     "create:article": "./scripts/create_article.sh",
     "postinstall": "rm -rf posts/* && mkdir -p posts && touch posts/.do-not-edit"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jonashdown/Blog.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jonashdown/Blog/issues"
-  },
-  "homepage": "https://github.com/jonashdown/Blog#readme",
-  "devDependencies": {
-    "@biomejs/biome": "^2.0.6",
-    "@mermaid-js/mermaid-cli": "^11.6.0",
-    "cspell": "^9.1.2",
-    "install": "^0.13.0",
-    "markdownlint-cli": "^0.45.0"
-  },
-  "dependencies": {
-    "node-fetch": "^3.3.2"
   }
 }

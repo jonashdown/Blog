@@ -6,6 +6,7 @@ globalThis.fetch = mock(() =>
     json: () =>
       Promise.resolve([
         {
+          id: 123,
           title: "Test Article",
           url: "http://example.com",
           description: "A test description.",
@@ -16,13 +17,13 @@ globalThis.fetch = mock(() =>
 
 const mockAppendFile = mock(() => Promise.resolve());
 
-mock.module("fs/promises", () => ({
+mock.module("node:fs/promises", () => ({
   appendFile: mockAppendFile,
 }));
 
 test("main function should prepare bluesky message and write to GITHUB_OUTPUT", async () => {
   process.env.DEVTO_USER = "testuser";
-  process.env.GITHUB_OUTPUT = "test_output.txt";
+  process.env.GITHUB_OUTPUT = "/tmp/github_output";
 
   // Dynamically import the module after setting environment variables
   const { main } = await import("./bluesky_devto_notifier.js");
@@ -30,7 +31,11 @@ test("main function should prepare bluesky message and write to GITHUB_OUTPUT", 
   await main();
 
   expect(mockAppendFile).toHaveBeenCalledWith(
-    "test_output.txt",
+    "/tmp/github_output",
     "bluesky_message=Test Article\n\nA test description.\n\nhttp://example.com\n",
+  );
+  expect(mockAppendFile).toHaveBeenCalledWith(
+    "/tmp/github_output",
+    "new_article_id=123\n",
   );
 });

@@ -1,27 +1,9 @@
-import { promises as fs } from "node:fs";
+import { appendFile } from "node:fs/promises";
 
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 const DEVTO_USER = process.env.DEVTO_USER;
 const DEVTO_API_URL = `https://dev.to/api/articles?per_page=1&username=${DEVTO_USER}`;
-const LAST_CHECKED_FILE = "last_checked_devto.json";
-
-async function loadLastChecked() {
-  try {
-    await fs.access(LAST_CHECKED_FILE);
-    const data = await fs.readFile(LAST_CHECKED_FILE, "utf8");
-    const { id } = JSON.parse(data);
-    return id;
-  } catch (error) {
-    if (error.code === "ENOENT") {
-      return null;
-    }
-    throw error;
-  }
-}
-
-async function saveLastChecked(id) {
-  return await fs.writeFile(LAST_CHECKED_FILE, JSON.stringify({ id }));
-}
+const LAST_ARTICLE_ID = process.env.LAST_ARTICLE_ID;
 
 async function sendDiscordMessage({ title, url, description, coverImage }) {
   const embed = {
@@ -29,10 +11,8 @@ async function sendDiscordMessage({ title, url, description, coverImage }) {
     url,
     description,
     color: 5814783, // A nice blue color
+    image: coverImage ? { url: coverImage } : undefined,
   };
-  if (coverImage) {
-    embed.image = { url: coverImage };
-  }
 
   const data = {
     embeds: [embed],
@@ -76,9 +56,8 @@ export async function main() {
       cover_image,
       description = "No description available.",
     } = articles[0];
-    const lastChecked = await loadLastChecked();
 
-    if (id === lastChecked) {
+    if (id.toString() === LAST_ARTICLE_ID) {
       console.log("no articles to publish");
       return;
     }
@@ -90,7 +69,14 @@ export async function main() {
       cover_image,
       description,
     });
-    saveLastChecked(id);
+
+    if (process.env.GITHUB_OUTPUT) {
+      await appendFile(
+        process.env.GITHUB_OUTPUT,
+        `new_article_id=${id}
+`,
+      );
+    }
   } catch (error) {
     console.error(`Error fetching articles from Dev.to API: ${error}`);
     process.exit(1);

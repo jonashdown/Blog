@@ -2,6 +2,7 @@
 import { appendFile } from "node:fs/promises";
 
 const DEVTO_API_URL = `https://dev.to/api/articles?per_page=1&username=${process.env.DEVTO_USER}`;
+const LAST_ARTICLE_ID = process.env.LAST_ARTICLE_ID;
 
 async function getLatestDevtoArticle() {
   try {
@@ -15,9 +16,16 @@ async function getLatestDevtoArticle() {
     }
   } catch (error) {
     console.error(`Error fetching articles from Dev.to API: ${error}`);
+    process.end(1);
   }
-  return null;
 }
+
+const constructMessage = ({ title, description, url }) =>
+  `${title}
+
+${description}
+
+${url}`;
 
 export async function main() {
   try {
@@ -28,13 +36,19 @@ export async function main() {
     }
 
     const {
+      id,
       title,
       url,
       description = "No description available.",
     } = latestArticle;
 
+    if (id.toString() === LAST_ARTICLE_ID) {
+      console.log("No new articles to post to Bluesky.");
+      return;
+    }
+
     // Construct the message for Bluesky
-    const message = `${title}\n\n${description}\n\n${url}`;
+    const message = constructMessage({ title, description, url });
     console.log(`Bluesky Message: ${message}`);
 
     // The actual posting to Bluesky will be handled by the GitHub Action
@@ -42,7 +56,13 @@ export async function main() {
     if (process.env.GITHUB_OUTPUT) {
       await appendFile(
         process.env.GITHUB_OUTPUT,
-        `bluesky_message=${message}\n`,
+        `bluesky_message=${message}
+`,
+      );
+      await appendFile(
+        process.env.GITHUB_OUTPUT,
+        `new_article_id=${id}
+`,
       );
     }
   } catch (error) {

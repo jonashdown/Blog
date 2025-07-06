@@ -6,6 +6,8 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,7 +21,21 @@ jobs:
         run: bun install
 
       - name: Run Discord Dev.to Notifier
+        id: discord_notifier
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           DEVTO_USER: ${{ vars.DEVTO_USER }}
+          LAST_ARTICLE_ID: ${{ vars.LAST_DISCORD_ARTICLE_ID }}
         run: bun run scripts/discord_devto_notifier.js
+
+      - name: Update last processed article ID
+        if: steps.discord_notifier.outputs.new_article_id != ''
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.actions.setRepoVariable({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'LAST_DISCORD_ARTICLE_ID',
+              value: '${{ steps.discord_notifier.outputs.new_article_id }}'
+            })

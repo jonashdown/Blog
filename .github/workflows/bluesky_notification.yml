@@ -6,6 +6,8 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,6 +24,7 @@ jobs:
         id: get_message
         env:
           DEVTO_USER: ${{ vars.DEVTO_USER }}
+          LAST_ARTICLE_ID: ${{ vars.LAST_BLUESKY_ARTICLE_ID }}
         run: bun run scripts/bluesky_devto_notifier.js
 
       - name: Post to Bluesky
@@ -31,3 +34,15 @@ jobs:
           identifier: ${{ secrets.BLUESKY_IDENTIFIER }}
           password: ${{ secrets.BLUESKY_PASSWORD }}
           text: ${{ steps.get_message.outputs.bluesky_message }}
+
+      - name: Update last processed article ID
+        if: steps.get_message.outputs.new_article_id != ''
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.actions.setRepoVariable({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'LAST_BLUESKY_ARTICLE_ID',
+              value: '${{ steps.get_message.outputs.new_article_id }}'
+            })

@@ -15,28 +15,23 @@ globalThis.fetch = mock(() =>
   }),
 );
 
-const mockAccess = mock(() => Promise.reject({ code: "ENOENT" }));
-const mockReadFile = mock(() => Promise.resolve(JSON.stringify({ id: 122 })));
-const mockWriteFile = mock(() => Promise.resolve());
+const mockAppendFile = mock(() => Promise.resolve());
 
-mock.module("fs", () => ({
-  promises: {
-    access: mockAccess,
-    readFile: mockReadFile,
-    writeFile: mockWriteFile,
-  },
+mock.module("node:fs/promises", () => ({
+  appendFile: mockAppendFile,
 }));
 
 test("main function should send discord message for new article", async () => {
   process.env.DISCORD_WEBHOOK_URL = "http://test.webhook.com";
   process.env.DEVTO_USER = "testuser";
+  process.env.GITHUB_OUTPUT = "/tmp/github_output";
 
   const { main } = await import("./discord_devto_notifier.js");
 
   await main();
 
-  expect(mockWriteFile).toHaveBeenCalledWith(
-    "last_checked_devto.json",
-    JSON.stringify({ id: 123 }),
+  expect(mockAppendFile).toHaveBeenCalledWith(
+    "/tmp/github_output",
+    "new_article_id=123\n",
   );
 });
