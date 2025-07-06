@@ -13,7 +13,7 @@ do
     BASENAME_NO_EXT=$(basename "$f" .md)
 
     #generate images using mermaid
-    bunx mmdc -i "$f" -o "posts/$FILENAME" --puppeteer-args="--no-sandbox"
+    bunx mmdc -i "$f" -o "posts/$FILENAME" --puppeteerConfigFile "./scripts/puppeteer-config.json"
 
     #replace relative image urls with absolute
     sed -i "s@\./@${RAW_URL}@g" "posts/$FILENAME"
