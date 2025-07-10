@@ -36,7 +36,7 @@ sequenceDiagram
   Test->>+OutputStore: Delete Data
 ```
 
-## How can race conditions occur ?
+## How can race conditions occur?
 
 ### Truncating databases whilst tests are still running
 
