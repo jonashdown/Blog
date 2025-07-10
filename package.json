@@ -28,7 +28,6 @@
     "lint:fix": "bunx markdownlint --fix \"articles/**/*.md\" && bunx biome check --apply-unsafe .",
     "generate:images": "./scripts/generate_images.sh",
     "commit:images": "./scripts/commit_images.sh",
-    "create:article": "./scripts/create_article.sh",
-    "postinstall": "rm -rf posts/* && mkdir -p posts && touch posts/.do-not-edit"
+    "create:article": "./scripts/create_article.sh"
   }
 }
