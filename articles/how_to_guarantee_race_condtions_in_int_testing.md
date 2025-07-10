@@ -1,7 +1,7 @@
 ---
 title:  How To Guarantee Race Conditions When Integration Testing
 description: An Exploration of how race conditions occur in integration testing and how to prevent them.
-tags: ''
+tags: 'testing, integration testing, race conditions, automation'
 cover_image: ''
 canonical_url: null
 published: true
@@ -13,7 +13,15 @@ On checking both the main branch and running the builds from developers machines
 
 ## Some Definitions
 
-Race conditions occur when several processes compete for a resource, and flaky tests are often a manifestation of that.
+Race conditions occur when several processes compete for a resource, and flaky integration tests are often a manifestation of that.
+
+```mermaid
+sequenceDiagram
+  Process1->>+SharedResource: Request
+  Process2->>+SharedResource: Request
+  SharedResource->>+Process2: Unreliable Response
+  SharedResource->>+Process1: Unreliable Response
+```
 
 The team's integration tests are automatically run on an environment like live (in this case an AWS account that has been set up to replicate the live environment) and exercise individual components in a larger microservice architecture. Typically they either write to data stores or trigger events and assert that the expected processing has taken place by interrogating other stores or capturing events from the processing.
 
@@ -26,6 +34,7 @@ sequenceDiagram
   Processor->>+OutputStore: Store processed data
   OutputStore->>+Test: Retrieve processed data
   Test->>+Test: Perform assertion
+  Test->>+OutputStore: Delete Data
 ```
 
 ## How can race conditions occur ?
@@ -33,6 +42,8 @@ sequenceDiagram
 ### Truncating databases whilst tests are still running
 
 Tidying up test data is good practice as it allows for stacks to be torn down efficiently without leaving any artifacts. However when each test suite attempts to truncate the databases it is using, race conditions are assured as other test suites may not have finished and may find themselves asserting against non-existent data.
+
+If the test is responsible for deleting the test data, any failure to delete will fail the test.
 
 ### Not allowing processes to complete before assertion
 
@@ -43,6 +54,20 @@ Data processing takes time. By inputting data and immediately asserting against 
 Copying test data between tests is guaranteed to get race conditions. Is test 1's data causing test 2 to pass? Is test 2 failing because test 1 is passing?  Is test 1 passing because test 2 is? No-one really knows, but our `ctl-c/ctrl-v` muscles have had a good workout.
 
 ## How can race conditions be prevented?
+
+```mermaid
+sequenceDiagram
+  TestRunner->>+Test: Initiate Test
+  Test->>+InputStore: Send input data
+  InputStore->>+Processor: Forward input data
+  Processor->>+OutputStore: Store processed data
+  OutputStore->>+Test: Retrieve processed data
+  Test->>+Test: Perform assertion
+  Test->>+TestRunner: Report Status
+  TestRunner->>+TestRunner: Wait for all tests to complete
+  TestRunner->>+InputStore: Truncate Input Store
+  TestRunner->>+OutputStore: Truncate Output Store
+```
 
 ### Truncate databases after all tests have finished
 

@@ -7,7 +7,7 @@ do
   if [ -f "$f" ]; then
     BASENAME_NO_EXT=$(basename "$f" .md)
 
-    git add "_svgs/${BASENAME_NO_EXT}"*.svg
+    git add "_pngs/${BASENAME_NO_EXT}"*.png
   fi
 done
 
