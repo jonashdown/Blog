@@ -202,8 +202,8 @@ test('should calculate the total price with tax', () => {
     .build as CartItem;
 
   const item2 = new CartItemBuilder()
-    .with('price': 0.5)
-    .with('quantity': 3)
+    .with('price', 0.5)
+    .with('quantity', 3)
     .build as CartItem;
 
 
@@ -260,13 +260,13 @@ export class CartBuilder extends AbstractDataBuilder<Cart> {
 test('should calculate the total price with tax', () => {
   // Arrange: Create the test data using the builder
   const item1 = new CartItemBuilder()
-    .with('price': 1.0)
-    .with('quantity': 2)
+    .with('price', 1.0)
+    .with('quantity', 2)
     .build as CartItem;
 
   const item2 = new CartItemBuilder()
-    .with('price': 0.5)
-    .with('quantity': 3)
+    .with('price', 0.5)
+    .with('quantity', 3)
     .build as CartItem;
 
   const cart = new CartBuilder()
@@ -294,8 +294,8 @@ test('should calculate the total price with tax', () => {
 What if we need to have missing data for a test? Currently we would need to use
 ```typescript
 const item = new CartItemBuilder()
-    .with('price': 0.5)
-    .with('quantity': 3)
+    .with('price', 0.5)
+    .with('quantity', 3)
     .with('name', undefined)
     .build;
 ```
@@ -435,5 +435,3 @@ Colleague:
 > The instantiation and overrides happen within each test, and as the defaults are randomized, we have mitigated against `Test Bleed`
 
 The conversation continued along the lines of how the builders where easy to maintain, and when the data structures change the affects are minimal.
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y1HG)
