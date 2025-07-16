@@ -9,12 +9,12 @@ title: TDD - Avoiding the Clangers
 
 Test-Driven Development, when done correctly, will provide the following benefits to any development team and organization:
 
-- Direction in coding
-- Documentation
-- Ongoing proof that software continues to work
-- Succinct, high-quality code
-- Fewer bugs
-- Confidence in the codebase
+- Direction in coding.
+- Documentation.
+- Ongoing proof that software continues to work.
+- Succinct, high-quality code.
+- Fewer bugs.
+- Confidence in the codebase.
 
 If done incorrectly, we could have a clanger, which could manifest as a bug in the future.
 
