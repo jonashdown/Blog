@@ -1,4 +1,4 @@
-'''---
+---
 canonical_url: null
 cover_image: https://raw.githubusercontent.com/jonashdown/Blog/main/_pngs/clangers.jpg
 description: "How to avoid the clangers in test-driven development"
@@ -9,12 +9,12 @@ title: TDD - Avoiding the Clangers
 
 Test-Driven Development, when done correctly, will provide the following benefits to any development team and organization:
 
-- Direction in coding.
-- Documentation.
-- Ongoing proof that software continues to work.
-- Succinct, high-quality code.
-- Fewer bugs.
-- Confidence in the codebase.
+- Direction in coding
+- Documentation
+- Ongoing proof that software continues to work
+- Succinct, high-quality code
+- Fewer bugs
+- Confidence in the codebase
 
 If done incorrectly, we could have a clanger, which could manifest as a bug in the future.
 
@@ -26,7 +26,44 @@ The key thing to note here is the failing test. If the test passes, then either 
 
 This can be visualized in the TDD Cycle:
 
-![diagram](https://raw.githubusercontent.com/jonashdown/Blog/main/_pngs/tdd_avoiding_the_clangers-1.png)
+```mermaid
+---
+displayMode: compact
+config:
+  look: handDrawn
+  layout: elk
+elk:
+  nodePlacementStrategy: LINEAR_SEGMENTS
+---
+
+stateDiagram-v2
+
+  think : Think - Write test case
+  fail: Fail - Red
+  pass: Pass (new test case) - Green
+  passAll: Pass all tests - Green
+  refactor: Refactor - Clear
+
+  think --> fail
+  fail --> pass
+  pass --> passAll
+  passAll --> refactor
+  refactor --> think
+
+  classDef block stroke-width:1px,color:black,font-style: italic, font-weight: bold, font-family: serif
+
+  classDef orange fill:moccasin,stroke:orange
+  classDef red fill:pink,stroke:red
+  classDef lightGreen fill:lightgreen,stroke:green
+  classDef darkGreen fill:limegreen,stroke:green
+  classDef blue fill:skyblue,stroke:blue
+
+  class think orange block
+  class fail red block
+  class pass lightGreen block
+  class passAll darkGreen block
+  class refactor blue block
+```
 
 ## Advanced Theory
 
@@ -36,7 +73,42 @@ There are several levels of testing, most of which can be automated. Whilst unit
 
 The pyramid of testing conceptually arranges these testing levels with manual testing at the top of the pyramid, end-to-end testing (where we test the full system), followed by integration testing (where we test some of the system and mock dependencies between services), and finally, unit testing (where we test the code and mock clients to services).
 
-![diagram](https://raw.githubusercontent.com/jonashdown/Blog/main/_pngs/tdd_avoiding_the_clangers-2.png)
+```mermaid
+---
+displayMode: compact
+config:
+  look: handDrawn
+  flowchart:
+    rankSpacing: 5
+---
+
+graph TD
+
+  manual@{ shape: tri, label: "Manual
+Testing
+#emsp;"}
+  e2e[/" End-to-End Tests "\]
+  int_test[/"#emsp; Integration Tests #emsp;"\]
+  unit_test[/"#emsp;#emsp;#emsp;#emsp; Unit Tests #emsp;#emsp;#emsp;"\]
+  manual --- e2e
+  e2e --- int_test
+  int_test --- unit_test
+
+  classDef pyramid stroke-width:2px, color:black
+
+  class manual pyramid
+  class e2e pyramid
+  class int_test pyramid
+  class unit_test pyramid
+
+  style manual fill:#f8d7da,stroke:#dc3545
+  style e2e fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+  style int_test fill:#d1ecf1,stroke:#17a2b8
+  style unit_test fill:#d1e7dd,stroke:#28a745,stroke-width:2px
+
+  linkStyle default stroke-width:0px;
+
+```
 
 As we go up the pyramid, any bugs that we find become more expensive. A bug found at the unit-test level might take an hour or so of developer time to fix, whilst bugs found at the very top of the pyramid could result in lost sales, lost trust, or, if we breach GDPR laws, £20 million fines and prison sentences.
 
@@ -61,7 +133,64 @@ BDD without TDD proves the feature is correct, but debugging will be difficult.
 BDD and TDD should be considered complementary, with BDD describing the feature (what) and TDD describing the implementation (how).
 
 
-![diagram](https://raw.githubusercontent.com/jonashdown/Blog/main/_pngs/tdd_avoiding_the_clangers-3.png)
+```mermaid
+---
+displayMode: compact
+config:
+  look: handDrawn
+---
+
+stateDiagram-v2
+  direction TB
+
+  state BDD {
+    thinkBDD : Think - Write feature test
+    failBDD: Fail - Red
+    passBDD: Pass (new test case) - Green
+    passAllBDD: Pass all Feature Tests - Green
+
+    thinkBDD --> failBDD
+    passBDD --> passAllBDD
+    passAllBDD --> thinkBDD
+  }
+
+  state TDD {
+    thinkTDD : Think - Write unit test
+    failTDD: Fail - Red
+    passTDD: Pass (new test case) - Green
+    passAllTDD: Pass all tests - Green
+    refactor: Refactor - Clear
+
+    thinkTDD --> failTDD
+    failTDD --> passTDD
+    passTDD --> passAllTDD
+    passAllTDD --> refactor
+    refactor --> thinkTDD
+  }
+
+  failBDD --> thinkTDD
+  refactor --> passBDD
+
+  classDef block stroke-width:1px,color:black
+
+  classDef orange fill:moccasin,stroke:orange
+  classDef red fill:lightcoral,stroke:red
+  classDef lightGreen fill:lightgreen,stroke:green
+  classDef darkGreen fill:limegreen,stroke:green
+  classDef blue fill:skyblue,stroke:blue
+
+  class thinkTDD orange block
+  class failTDD red block
+  class passTDD lightGreen block
+  class passAllTDD darkGreen block
+  class refactor blue block
+
+  class thinkBDD orange block
+  class failBDD red block
+  class passBDD lightGreen block
+  class passAllBDD darkGreen block
+
+```
 
 ### Test for the Presence of a Function
 
@@ -537,4 +666,3 @@ It would be better to simply delete this test and have an end-to-end test that a
 
 - [Buy me a coffee](https://buymeacoffee.com/jonashdown)
 - [Ko-fi](https://ko-fi.com/Y8Y1HG7Q3)
-'''
