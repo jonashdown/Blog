@@ -33,6 +33,9 @@ jobs:
     - name: Generate images and posts
       run: ./scripts/generate_images.sh
 
+    - name: Add Post to git
+      run: git add posts/*
+
     - name: Publish articles on dev.to
       uses: sinedied/publish-devto@v2
       with:
